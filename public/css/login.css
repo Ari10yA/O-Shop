@@ -1,0 +1,12 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-image: radial-gradient(
+      circle farthest-corner at 10% 20%,
+      rgb(162, 252, 252) 0%,
+      rgb(57, 101, 245) 90%
+    );
+  }

@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://js.stripe.com/v3/">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (cart.length > 0) { %>
+                <ul class="cart__item-list">
+                    <% cart.forEach(cart_item => { %>
+                        <li class="cart__item">
+                            <h1><%= cart_item.prodId.title %></h1>
+                            <h2>Quantity: <%= cart_item.quantity %></h2>
+                            <form action="/cart-delete-item" method="POST">
+                                <input type="hidden" value="<%= cart_item.prodId._id %>" name="productId">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="btn danger" type="submit">Delete</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+                <hr>
+                <div class="centered">
+                    <form action="/create-order" method="POST">
+                        <button type="submit" class="btn">Order Now!</button>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    </form>
+                    <!-- <a class="btn" href="/checkout">Order Now</a> -->
+                </div>
+                
+            <% } else { %>
+                <h1>No Products in Cart!</h1>
+            <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>
