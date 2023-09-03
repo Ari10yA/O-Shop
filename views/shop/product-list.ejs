@@ -13,7 +13,7 @@
                             <% for (let product of prods) { %>
                                 <article class="card product-item">
                                     <div class="card__image">
-                                        <img src="<%= product.imageUrl %>"
+                                        <img src="/<%= product.imageUrl %>"
                                             alt="<%= product.title %>">
                                     </div>
                                     <div class="card__container">
@@ -30,11 +30,7 @@
                                     <div class="devider"></div>
             
                                     <p class="product__description">Description:- <%= product.description %></p>
-                                    
-                                    <!-- <div class="card__content">
-                                        <h2 class="product__price">₹<%= product.price %></h2>
-                                        <p class="product__description"><%= product.description %></p>
-                                    </div> -->
+                                
                                     <div class="card__actions">
                                             <% if(isAuthenticated) { %>
                                         <%- include('../includes/add-to-cart.ejs', {product: product}) %>
@@ -47,17 +43,17 @@
                         </div>
                         <section class="pagination">
                             <% if(currentPage !=1 && previousPage != 1) { %>
-                                <a href="/?page=1">Start</a>
+                                <a href="/products/?page=1">Start</a>
                             <% } %>
                             <% if(hasPreviousPage) { %>
-                                <a href="/?page=<%=previousPage%>"><%= previousPage %></a>
+                                <a href="/products/?page=<%=previousPage%>"><%= previousPage %></a>
                             <% } %>
-                            <a href="/?page=<%=currentPage%>" class="active"><%= currentPage %></a>
+                            <a href="/products/?page=<%=currentPage%>" class="active"><%= currentPage %></a>
                             <% if(hasNextPage) { %>
-                                <a href="/?page=<%=nextPage%>"><%= nextPage %></a>
+                                <a href="/products/?page=<%=nextPage%>"><%= nextPage %></a>
                             <% } %>
                             <% if(lastPage !== currentPage && nextPage!==lastPage) { %>
-                            <a href="/?page=<%=lastPage%>">End</a>
+                            <a href="/products/?page=<%=lastPage%>">End</a>
                             <% } %>
                         </section>
                     <% } else { %>

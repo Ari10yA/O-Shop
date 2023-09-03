@@ -38,11 +38,7 @@
                             <div class="devider"></div>
     
                             <p class="product__description">Description:- <%= product.description %></p>
-                            
-                            <!-- <div class="card__content">
-                                <h2 class="product__price">₹<%= product.price %></h2>
-                                <p class="product__description"><%= product.description %></p>
-                            </div> -->
+                        
                             <div class="card__actions">
                                     <% if(isAuthenticated) { %>
                                 <%- include('../includes/add-to-cart.ejs', {product: product}) %>
@@ -58,4 +54,20 @@
             <% } %>
         </section>
     </main>
+    <section class="footer">
+        <div class="col1">
+            <span class="col1__heading">
+                O-Shop
+            </span>
+        </div>
+
+        <div class="col2">
+            <span class="footer_link"><a href="./contact">Contact</a></span>
+        </div>
+
+        <div class="col3">
+            <span class="footer_link"><a href="./aboutus">About Us</a></span>
+        </div>
+
+    </section>
 <%- include('../includes/end.ejs') %>

@@ -101,19 +101,6 @@ app.use(errorController.get404);
 
 mongoose.connect(MONGODB_URI)
 .then(result => {
-  // const user = new User({
-  //   username: 'Aritya',
-  //   email: 'aritya@gmail.com',
-  //   products: []
-  // })
-  // user.save();
-
-  // const cart = new Cart ({
-  //   userId: new mongoose.Types.ObjectId('648476496e577c9fbcc08cde'),
-  //   products: []
-  // })
-
-  // cart.save();
   app.listen(process.env.PORT || 4000, () => {
     console.log('Server is up and running on the localhost 4000');
   });

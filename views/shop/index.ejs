@@ -69,10 +69,6 @@
     
                             <p class="product__description">Description:- <%= product.description %></p>
                             
-                            <!-- <div class="card__content">
-                                <h2 class="product__price">₹<%= product.price %></h2>
-                                <p class="product__description"><%= product.description %></p>
-                            </div> -->
                             <div class="card__actions">
                                     <% if(isAuthenticated) { %>
                                 <%- include('../includes/add-to-cart.ejs', {product: product}) %>
@@ -83,21 +79,7 @@
                         </article>
                     <% } %>
                 </div>
-                <!-- <section class="pagination">
-                    <% if(currentPage !=1 && previousPage != 1) { %>
-                        <a href="/?page=1">Start</a>
-                    <% } %>
-                    <% if(hasPreviousPage) { %>
-                        <a href="/?page=<%=previousPage%>"><%= previousPage %></a>
-                    <% } %>
-                    <a href="/?page=<%=currentPage%>" class="active"><%= currentPage %></a>
-                    <% if(hasNextPage) { %>
-                        <a href="/?page=<%=nextPage%>"><%= nextPage %></a>
-                    <% } %>
-                    <% if(lastPage !== currentPage && nextPage!==lastPage) { %>
-                    <a href="/?page=<%=lastPage%>">End</a>
-                    <% } %>
-                </section> -->
+                
             <% } else { %>
                 <h1>No Products Found!</h1>
             <% } %>
@@ -112,6 +94,7 @@
             
             <div class="newsletter-subscription">
                 <form action="/newsletter-signup" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input class="email" type="email" name="email" placeholder="E-mail">
                     <button class="btn cta-button" type="SUBMIT">Submit</button>
                 </form>  

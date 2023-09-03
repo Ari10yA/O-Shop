@@ -7,7 +7,7 @@ const Product = require('../models/product');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 4;
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -99,7 +99,6 @@ exports.postEditProduct = (req, res, next) => {
   if(!imageUrl) {
     return Product.findByIdAndUpdate(new ObjectId(prodId), {title: updatedTitle, price: updatedPrice, description: updatedDesc})
     .then(update => {
-      console.log('Successfully Updated with no image');
       res.redirect('/admin/products')
     })
     .catch(err => {
@@ -110,13 +109,7 @@ exports.postEditProduct = (req, res, next) => {
   else {
     return Product.findByIdAndUpdate(new ObjectId(prodId), {title: updatedTitle, price: updatedPrice, imageUrl: imageUrl, description: updatedDesc})
     .then(update => {
-      console.log('Successfully Updated with image');
       fs.unlink(update.imageUrl, (err) => {
-        if (err) {
-          console.error('Error deleting the image:', err);
-        } else {
-          console.log('Image deleted successfully.');
-        }
       });
       res.redirect('/admin/products')
     })
@@ -152,14 +145,13 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-
   let page = Number(req.query.page);
   if(!page) page = 1;
   let total;
-  Product.countDocuments()
+  Product.countDocuments({userId: req.user._id})
   .then(number => {
     total = number;
-    return Product.find({})
+    return Product.find({userId: req.user._id})
     .skip((page-1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE)
       .then(products => {
@@ -198,15 +190,8 @@ exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findByIdAndRemove(new ObjectId(prodId))
     .then((result) => {
-      console.log(result);
       fs.unlink(result.imageUrl, (err) => {
-        if (err) {
-          console.error('Error deleting the image:', err);
-        } else {
-          console.log('Image deleted successfully.');
-        }
       });
-      console.log('Product removed');
       res.redirect('/admin/products');
     })
     .catch(err => console.log(err));

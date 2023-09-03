@@ -368,7 +368,6 @@ exports.postOrder = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   Order.find({userId: req.user._id}).populate('products.prodId userId')
   .then(orders => {
-    console.log(orders);
     res.render('shop/orders', {
       path: '/orders',
       pageTitle: 'Your Orders',
@@ -514,4 +513,9 @@ exports.getCheckoutSuccess = (req, res, next) => {
     })
     .catch(err => console.log(err)); 
   }) 
+}
+
+exports.postNewsLetterSignUp = (req, res, next) => {
+  const email = req.body.email;
+  res.redirect('/');
 }

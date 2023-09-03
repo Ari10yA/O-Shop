@@ -35,5 +35,7 @@ router.get('checkout/success', protect, shopController.getCheckoutSuccess);
 
 router.get('checkout/cancel', protect, shopController.getCheckout);
 
+router.post('/newsletter-signup', shopController.postNewsLetterSignUp);
+
 
 module.exports = router;

@@ -9,7 +9,7 @@ const { validationResult } = require('express-validator')
 
 const transporter = nodemailer.createTransport((sendgridTransport({
     auth: {
-        api_key: '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'
+        api_key: `${process.env.NODEMAILER_KEY}`
     }
 })))
 
@@ -31,7 +31,6 @@ exports.postLogin = (req, res, next) => {
     const password = req.body.password;
 
     const errors = validationResult(req)
-    console.log(errors.array());
 
     if(!errors.isEmpty()){
         return res.render('auth/login', {
@@ -44,13 +43,10 @@ exports.postLogin = (req, res, next) => {
             }
         });
     }
-    console.log('check1');
-    console.log(email);
     User.findOne({email : email})
     .then(user => {
         console.log(user);
         if(!user){
-            console.log('check');
             return res.render('auth/login', {
                 pageTitle: 'Login',
                 path: '/login',
@@ -61,12 +57,9 @@ exports.postLogin = (req, res, next) => {
                 }
             });
         }
-        console.log('check2');
         bcrypt.compare(password, user.password)
         .then(result => {
-            console.log(result);
             if(result){
-                console.log(result);
                 req.session.user = user;
                 req.session.isLoggedIn = true;
                 req.session.save(() => {
@@ -132,7 +125,6 @@ exports.postSignUp = (req, res, next) => {
     const errors = validationResult(req);
 
     let errorMessage = [];
-    console.log(errors.array());
 
 
     if(!errors.isEmpty()){
@@ -210,7 +202,6 @@ exports.postReset = (req, res, next) => {
                 return res.redirect('/reset');
             }
             let currentDate = new Date();
-            console.log(user);
             user.token = str;
             user.validTill = new Date(currentDate.getTime() + 60*60000);
 
