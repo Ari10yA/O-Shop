@@ -10,7 +10,7 @@ const stripe = require('stripe')(`sk_test_51NN9AvSA9Qlpc8ooVO9sKWhQPkhQyEgckZ495
 
 //sk_test_51NN9AvSA9Qlpc8ooVO9sKWhQPkhQyEgckZ495Wn4wHIlVqhfTBGSwA9ch7pYXBGYWCYAhm0fVHPA2qO7b3cwZazP00q5dK2Wj6
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 4;
 
 
 exports.getProducts = (req, res, next) => {
@@ -73,6 +73,32 @@ exports.getProducts = (req, res, next) => {
   //   });
 };
 
+
+exports.searchProducts =  (req, res, next) => {
+  res.render('shop/search', {
+    prods: [],
+    pageTitle: "Search",
+    path: '/search',
+  })
+}
+
+exports.postSearchProducts = (req, res, next) => {
+  const searchString = req.body.searchString;
+  const regexPattern = new RegExp(searchString, 'i');
+
+Product.find({ title: regexPattern })
+    .then(products => {
+      res.render('shop/search', {
+        prods: products,
+        pageTitle: "Search",
+        path: '/search',
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
 
@@ -119,7 +145,6 @@ exports.getIndex = (req, res, next) => {
   .then(number => {
     total = number;
     return Product.find({})
-    .skip((page-1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE)
       .then(products => {
         res.render('shop/index', {

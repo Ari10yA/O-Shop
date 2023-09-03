@@ -1,18 +1,48 @@
 <%- include('../includes/head.ejs') %>
+        <link rel="stylesheet" href="/css/product.css">
     </head>
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-        <main class="centered">
-            <h1><%= product.title %></h1>
-            <hr>
-            <div class="image">
-                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+        <main>
+            <h1 class="product__details-brand">Brand/Product</h1>
+            <div class="devider"></div>
+            
+            <div class="product__details-container">
+                
+                <div class="image">
+                    <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+
+                <div class="product__details-rightside">
+                    <h1 class="product__details-title"><%= product.title %></h1>
+                    <h2 class="product__details-price">₹<%= product.price %></h2>
+                    
+                    <p class="product__details-desc"> <span class="custom-title">Product Description - </span> <%= product.description %></p>
+
+
+                    <% if(isAuthenticated){ %>
+                    <%- include('../includes/add-to-cart.ejs') %>
+                    <% } %>
+                </div>
+                
             </div>
-            <h2><%= product.price %></h2>
-            <p><%= product.description %></p>
-            <% if(isAuthenticated){ %>
-            <%- include('../includes/add-to-cart.ejs') %>
-            <% } %>
         </main>
+
+        <section class="footer">
+            <div class="col1">
+                <span class="col1__heading">
+                    O-Shop
+                </span>
+            </div>
+
+            <div class="col2">
+                <span class="footer_link"><a href="./contact">Contact</a></span>
+            </div>
+
+            <div class="col3">
+                <span class="footer_link"><a href="./aboutus">About Us</a></span>
+            </div>
+
+        </section>
         <%- include('../includes/end.ejs') %>

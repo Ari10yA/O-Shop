@@ -10,32 +10,37 @@
                     <div class="grid">
                         <% for (let product of prods) { %>
                             <article class="card product-item">
-                                <header class="card__header">
-                                    <h1 class="product__title">
-                                        <%= product.title %>
-                                    </h1>
-                                </header>
                                 <div class="card__image">
-                                    <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+                                    <img src="/<%= product.imageUrl %>"
+                                        alt="<%= product.title %>">
                                 </div>
-                                <div class="card__content">
-                                    <h2 class="product__price">₹
-                                        <%= product.price %>
-                                    </h2>
-                                    <p class="product__description">
-                                        <%= product.description %>
-                                    </p>
+                                <div class="card__container">
+                                    <div class="card__container-left">
+                                        <h1 class="product__title"><%= product.title %></h1>
+                                        <h2 class="product__price">₹<%= product.price %></h2>
+                                    </div>
+        
+                                    <div class="card__container-right">
+                                        <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Edit</a>
+                                    </div>
                                 </div>
+        
+                                <div class="devider"></div>
+        
+                                <p class="product__description">Description:- <%= product.description %></p>
+                                
                                 <div class="card__actions">
-                                    <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Edit</a>
                                     <form action="/admin/delete-product" method="POST">
                                         <input type="hidden" value="<%= product._id %>" name="productId">
-                                        <button class="btn" type="submit">Delete</button>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <button class="btn products-btn" type="submit"><i class="gg-remove"></i></button>
+                                        <p class="helper-text">Remove</p>
                                     </form>
-
+                    
                                 </div>
+                                
                             </article>
-                            <% } %>
+                        <% } %>
                     </div>
                     <section class="pagination">
                         <% if(currentPage !=1 && previousPage != 1) { %>
@@ -57,3 +62,4 @@
                         <% } %>
             </main>
             <%- include('../includes/end.ejs') %>
+

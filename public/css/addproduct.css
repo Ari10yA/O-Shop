@@ -10,22 +10,22 @@ main{
 }
 
 .container {
-  height: 100vh;
+  height: 96vh;
   width: 100%;
   align-items: center;
   display: flex;
   justify-content: center;
   background-image: radial-gradient(
     circle farthest-corner at 10% 20%,
-    rgb(228, 101, 253) 30%,
-    rgb(132, 225, 253) 60%
+    rgba(253, 101, 133, 1) 0%,
+    rgba(255, 211, 165, 1) 90%
   );
 }
 
 .card {
   border-radius: 10px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
-  width: 30%;
+  width: 90%;
   background-color: #ffffff;
   padding: 10px 30px;
 }
@@ -98,4 +98,10 @@ main{
 .reset_title {
   text-align: center;
   margin: 15px;
+}
+
+@media (min-width: 530px) {
+  .card {
+    max-width: 480px;
+  }
 }

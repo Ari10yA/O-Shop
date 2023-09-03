@@ -11,6 +11,10 @@ router.get('/', shopController.getIndex);
 
 router.get('/products', shopController.getProducts);
 
+router.get('/search', shopController.searchProducts);
+
+router.post('/search', shopController.postSearchProducts);
+
 router.get('/products/:productId', shopController.getProduct);
 
 router.get('/cart', protect, shopController.getCart);

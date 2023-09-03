@@ -5,11 +5,13 @@ const menuToggle = document.querySelector('#side-menu-toggle');
 function backdropClickHandler() {
   backdrop.style.display = 'none';
   sideDrawer.classList.remove('open');
+  menuToggle.classList.toggle('change');
 }
 
 function menuToggleClickHandler() {
-  backdrop.style.display = 'block';
-  sideDrawer.classList.add('open');
+  backdrop.classList.toggle('active');
+  sideDrawer.classList.toggle('open');
+  menuToggle.classList.toggle('change');
 }
 
 backdrop.addEventListener('click', backdropClickHandler);

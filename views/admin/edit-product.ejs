@@ -15,9 +15,9 @@
               </div> -->
               <div class="form">
                 <form action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="title" id="title" value="<% if (editing) { %><%= product.title %><% } %>" placeholder="UserName" />
-                    <input type="file" name="image" id="image" placeholder="Image" id="image" />
-                    <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %><%= product.price %><% } %>" placeholder="Price" id="price" />
+                    <input type="text" name="title" id="title" value="<% if (editing) { %><%= product.title %><% } %>" placeholder="ProductName" />
+                    <input type="file" name="image" id="image" placeholder="Image"/>
+                    <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %><%= product.price %><% } %>" placeholder="Price" />
                     <input type="text" name="description" id="description" rows="5" placeholder="Description" value="<% if (editing) { %><%= product.description %><% } %>">
                     <% if (editing) { %>
                         <input type="hidden" value="<%= product._id %>" name="productId">
@@ -27,7 +27,7 @@
                 </form>
               </div>
               <div class="card_terms">
-                  <input type="checkbox" name="" id="terms"> <span>Be Careful on submitting <a href="">Terms of Service</a></span>
+                  <input type="checkbox" name="" id="terms"> <span>Be Careful on submitting </span>
               </div>
             </div>
           </div>

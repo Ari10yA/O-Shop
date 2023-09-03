@@ -6,22 +6,171 @@
 }
 
 .product-item {
-    width: 20rem;
-    max-width: 95%;
+    width: 90%;
     margin: 1rem;
+    border-radius: 15px;
 }
 
 .product__title {
-    font-size: 1.2rem;
-    text-align: center;
+    font-family: 'Teko', sans-serif;
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
 }
 
 .product__price {
-    text-align: center;
+    margin:  0;
     color: #4d4d4d;
-    margin-bottom: 0.5rem;
 }
 
 .product__description {
+    width: 90%;
+    margin: 5px auto;
+    font-size: .8rem;
+}
+
+.search-input__form{
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input__form input{
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-width: 452px;
+    font-size: 1rem;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: .15rem;
+}
+
+.search-input__form .ctabtn{
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+}
+
+
+
+.product__details-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product__details-brand{
+    font-size: 1rem;
+    color:#868686;
     text-align: center;
+}
+
+.product__details-title{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.product__details-price{
+    margin: 0.5rem;
+    font-size: 1.2rem;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.custom-title{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+}
+
+.product__details-rightside{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+
+
+
+@media (min-width: 530px) {
+    .product-item {
+        width: 40%;
+    }
+
+    .product__title {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .product__price {
+        font-size: 1.1rem;
+    }
+
+    .search-input__form{
+        flex-direction: row;
+    }
+
+    .search-input__form input{
+        width: 50%;
+        margin: .5rem .5rem;
+    }
+
+}
+
+@media (min-width: 900px){
+    .product-item {
+        width: 350px;
+    }
+
+    .product__title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .product__price {
+        font-size: 1.5rem;
+    }
+
+
+    .image{
+        height: 32rem;
+        margin: 2rem;
+    }
+
+    .product__details-container{
+        flex-direction: row;
+    }
+
+    .product__details-brand{
+        font-size: 1.4rem;
+    }
+
+    .product__details-rightside{
+        display: flex;
+        align-items: center;
+        width: 30rem;
+        flex-direction: column;
+    }
+
+    .product__details-title{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 2.5rem;
+    }
+
+    .product__details-price{
+        font-size: 1.5rem;
+    }
+
+    .custom-title{
+        font-size: 1.2rem;
+    }
+
+    .cart-button {
+        padding: 1rem;
+    }
 }

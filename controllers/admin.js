@@ -1,3 +1,8 @@
+const fs = require("fs");
+const path = require("path");
+
+
+
 const Product = require('../models/product');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
@@ -85,16 +90,48 @@ exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
-  const updatedImageUrl = req.body.imageUrl;
+  const updatedImage = req.file;
   const updatedDesc = req.body.description;
 
-  Product.findByIdAndUpdate(new ObjectId(prodId), {title: updatedTitle, price: updatedPrice, imageUrl: updatedImageUrl, description: updatedDesc})
-  .then(update => {
-    res.redirect('/admin/products')
-  })
-  .catch(err => {
-    console.log(err);
-  })
+  let imageUrl = null;
+  if(updatedImage) imageUrl = updatedImage.path;
+
+  if(!imageUrl) {
+    return Product.findByIdAndUpdate(new ObjectId(prodId), {title: updatedTitle, price: updatedPrice, description: updatedDesc})
+    .then(update => {
+      console.log('Successfully Updated with no image');
+      res.redirect('/admin/products')
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
+  else {
+    return Product.findByIdAndUpdate(new ObjectId(prodId), {title: updatedTitle, price: updatedPrice, imageUrl: imageUrl, description: updatedDesc})
+    .then(update => {
+      console.log('Successfully Updated with image');
+      fs.unlink(update.imageUrl, (err) => {
+        if (err) {
+          console.error('Error deleting the image:', err);
+        } else {
+          console.log('Image deleted successfully.');
+        }
+      });
+      res.redirect('/admin/products')
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
+  // Product.findByIdAndUpdate(new ObjectId(prodId), {title: updatedTitle, price: updatedPrice, imageUrl: updatedImageUrl, description: updatedDesc})
+  // .then(update => {
+  //   res.redirect('/admin/products')
+  // })
+  // .catch(err => {
+  //   console.log(err);
+  // })
   // Product.updateData(updatedTitle, updatedPrice, updatedDesc, updatedImageUrl, prodId, req.user._id)
   // .then(() => {
   //   res.redirect('/admin/products');
@@ -162,6 +199,13 @@ exports.postDeleteProduct = (req, res, next) => {
   Product.findByIdAndRemove(new ObjectId(prodId))
     .then((result) => {
       console.log(result);
+      fs.unlink(result.imageUrl, (err) => {
+        if (err) {
+          console.error('Error deleting the image:', err);
+        } else {
+          console.log('Image deleted successfully.');
+        }
+      });
       console.log('Product removed');
       res.redirect('/admin/products');
     })

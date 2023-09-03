@@ -6,48 +6,133 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <% if (prods.length > 0) { %>
-            <div class="grid">
-                <% for (let product of prods) { %>
-                    <article class="card product-item">
-                        <header class="card__header">
-                            <h1 class="product__title"><%= product.title %></h1>
-                        </header>
-                        <div class="card__image">
-                            <img src="<%= product.imageUrl %>"
-                                alt="<%= product.title %>">
-                        </div>
-                        <div class="card__content">
-                            <h2 class="product__price">₹<%= product.price %></h2>
-                            <p class="product__description"><%= product.description %></p>
-                        </div>
-                        <div class="card__actions">
-                                <a href="/products/<%= product.id %>" class="btn">Details</a>
-                                <% if(isAuthenticated) { %>
-                            <%- include('../includes/add-to-cart.ejs', {product: product}) %>
 
-                            <% } %>
-                        </div>
-                    </article>
-                <% } %>
+        <div class="centered">
+            <div class="heading__image">
             </div>
-            <section class="pagination">
-                <% if(currentPage !=1 && previousPage != 1) { %>
-                    <a href="/?page=1">1</a>
-                <% } %>
-                <% if(hasPreviousPage) { %>
-                    <a href="/?page=<%=previousPage%>"><%= previousPage %></a>
-                <% } %>
-                <a href="/?page=<%=currentPage%>" class="active"><%= currentPage %></a>
-                <% if(hasNextPage) { %>
-                    <a href="/?page=<%=nextPage%>"><%= nextPage %></a>
-                <% } %>
-                <% if(lastPage !== currentPage && nextPage!==lastPage) { %>
-                <a href="/?page=<%=lastPage%>"><%= lastPage %></a>
-                <% } %>
-            </section>
-        <% } else { %>
-            <h1>No Products Found!</h1>
-        <% } %>
+            <span class="heading__image-text">
+                O-Shop
+            </span>
+        </div>
+
+        <section class="features">
+            <h1 class="feature__heading">Features In The Website</h1>
+            <div class="feature__lists">
+                <div class="feature__list">
+                    <p class="feature__list-heading">Online Shopping</p>
+                    <div class="feature__list-image-container">
+                        <img class="feature__list-image" src="./images/P1.png">
+                    </div>
+                    
+                </div>
+
+                <div class="feature__list">
+                    <p class="feature__list-heading">Authentication</p>
+                    <div class="feature__list-image-container">
+                        <img class="feature__list-image" src="./images/p2.jpg">
+                    </div>
+                </div>
+
+                <div class="feature__list">
+                    <p class="feature__list-heading">Multiple Sellers</p>
+                    <div class="feature__list-image-container">
+                        <img class="feature__list-image" src="./images/p3.jpg">
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+
+        <section class="feature__products">
+            <h1 class="feature__products-heading">Main Products</h1>
+            <% if (prods.length > 0) { %>
+                <div class="grid">
+                    <% for (let product of prods) { %>
+                        <article class="card product-item">
+                            <div class="card__image">
+                                <img src="<%= product.imageUrl %>"
+                                    alt="<%= product.title %>">
+                            </div>
+                            <div class="card__container">
+                                <div class="card__container-left">
+                                    <h1 class="product__title"><%= product.title %></h1>
+                                    <h2 class="product__price">₹<%= product.price %></h2>
+                                </div>
+    
+                                <div class="card__container-right">
+                                    <a href="/products/<%= product.id %>" class="btn">Details</a>
+                                </div>
+                            </div>
+    
+                            <div class="devider"></div>
+    
+                            <p class="product__description">Description:- <%= product.description %></p>
+                            
+                            <!-- <div class="card__content">
+                                <h2 class="product__price">₹<%= product.price %></h2>
+                                <p class="product__description"><%= product.description %></p>
+                            </div> -->
+                            <div class="card__actions">
+                                    <% if(isAuthenticated) { %>
+                                <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+    
+                                <% } %>
+                            </div>
+                            
+                        </article>
+                    <% } %>
+                </div>
+                <!-- <section class="pagination">
+                    <% if(currentPage !=1 && previousPage != 1) { %>
+                        <a href="/?page=1">Start</a>
+                    <% } %>
+                    <% if(hasPreviousPage) { %>
+                        <a href="/?page=<%=previousPage%>"><%= previousPage %></a>
+                    <% } %>
+                    <a href="/?page=<%=currentPage%>" class="active"><%= currentPage %></a>
+                    <% if(hasNextPage) { %>
+                        <a href="/?page=<%=nextPage%>"><%= nextPage %></a>
+                    <% } %>
+                    <% if(lastPage !== currentPage && nextPage!==lastPage) { %>
+                    <a href="/?page=<%=lastPage%>">End</a>
+                    <% } %>
+                </section> -->
+            <% } else { %>
+                <h1>No Products Found!</h1>
+            <% } %>
+        </section>
+
+        <section class="newsletter">
+            <div class="newsletter__container-text">
+                <span class="newsletter-heading">Sign Up For Newsletters</span>
+            <span class="newsletter-text">Get Email updates about our latest news and <span>Special Offers</span></span>
+            </div>
+            
+            
+            <div class="newsletter-subscription">
+                <form action="/newsletter-signup" method="POST">
+                    <input class="email" type="email" name="email" placeholder="E-mail">
+                    <button class="btn cta-button" type="SUBMIT">Submit</button>
+                </form>  
+            </div>
+        </section>
+
+        <section class="footer">
+            <div class="col1">
+                <span class="col1__heading">
+                    O-Shop
+                </span>
+            </div>
+
+            <div class="col2">
+                <span class="footer_link"><a href="./contact">Contact</a></span>
+            </div>
+
+            <div class="col3">
+                <span class="footer_link"><a href="./aboutus">About Us</a></span>
+            </div>
+
+        </section>
     </main>
 <%- include('../includes/end.ejs') %>

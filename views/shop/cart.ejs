@@ -20,10 +20,10 @@
                         </li>
                     <% }) %>
                 </ul>
-                <hr>
-                <div class="centered">
+                <div class="devider"></div>
+                <div class="form__centered">
                     <form action="/create-order" method="POST">
-                        <button type="submit" class="btn">Order Now!</button>
+                        <button type="submit" class="btn">Order Now</button>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                     <!-- <a class="btn" href="/checkout">Order Now</a> -->
@@ -33,4 +33,21 @@
                 <h1>No Products in Cart!</h1>
             <% } %>
         </main>
+
+        <section class="footer">
+            <div class="col1">
+                <span class="col1__heading">
+                    O-Shop
+                </span>
+            </div>
+
+            <div class="col2">
+                <span class="footer_link"><a href="./contact">Contact</a></span>
+            </div>
+
+            <div class="col3">
+                <span class="footer_link"><a href="./aboutus">About Us</a></span>
+            </div>
+
+        </section>
         <%- include('../includes/end.ejs') %>
